@@ -41,8 +41,8 @@ def get_refresh_token(body: RefreshTokenRequest):
     validated = check_refresh_token(body.refresh_token)
     if validated:
         return {
-        "access_token": generate_access_token(validated_refresh_token["user_id"]),  # ✅
-        "refresh_token": generate_refresh_token(validated_refresh_token["user_id"])}
+        "access_token": generate_access_token(validated["user_id"]),  #
+        "refresh_token": generate_refresh_token(validated["user_id"])}
     else:
         raise HTTPException(status_code=400,detail="Invalid refresh token")    
 

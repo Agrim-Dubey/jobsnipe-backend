@@ -1,6 +1,7 @@
 from fastapi_app.db.database import Base
 from sqlalchemy import Column, Integer,String,DateTime,Boolean
 from datetime import datetime,timezone
+from sqlalchemy.orm import relationship 
 
 class User(Base):
     __tablename__="users"
@@ -9,3 +10,4 @@ class User(Base):
     hashed_password=Column(String,nullable=False)
     created_at=Column(DateTime,default=lambda: datetime.now(timezone.utc))
     is_active=Column(Boolean,default=True)
+    resumes = relationship("Resume", back_populates="user")
