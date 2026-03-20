@@ -8,7 +8,7 @@ from fastapi_app.schemas.resume import ResumeUploadResponse,ResumeResponse
 
 
 
-router=APIRouter(prefix="/resume",tags=["Resume"])
+router=APIRouter()
 
 
 @router.post("/upload",response_model=ResumeUploadResponse)
