@@ -24,7 +24,7 @@ def generate_access_token(user_id):
 def generate_refresh_token(user_id):
     expire = datetime.now(timezone.utc) + timedelta(minutes=REFRESH_TOKEN_EXPIRE_MINUTES)
     to_encode = {"user_id": user_id, "exp": expire} 
-    return jwt.encode(to_encode,SECRET_KEY,ALGORITHM)   
+    return jwt.encode(to_encode,SECRET_KEY,algorhtm=ALGORITHM)   
 
 
 

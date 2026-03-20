@@ -1,9 +1,9 @@
 from fastapi import APIRouter,Depends
 from fastapi import HTTPException
-from fastapi_app.schemas.user import UserCreate,UserResponse,LoginResponse,UserLogin
+from fastapi_app.schemas.user import UserCreate,UserResponse,LoginResponse,UserLogin,GetRefreshTokenResponse,RefreshTokenRequest
 from fastapi_app.db.database import get_db 
 from sqlalchemy.orm import Session 
-from fastapi_app.services.auth_service import check_user_exists,check_password_regex,check_user
+from fastapi_app.services.auth_service import check_user_exists,check_password_regex,check_user,check_refresh_token
 from fastapi_app.security import hash_password,generate_access_token,generate_refresh_token
 from fastapi_app.models.users import User
 
@@ -36,5 +36,13 @@ def user_login(user:UserLogin,db:Session=Depends(get_db)):
         refresh_token = generate_refresh_token(user_real.id)
         return {"user_id": user_real.id, "email": user_real.email,"access_token":access_token,"refresh_token":refresh_token,"token_type":"bearer"}
 
-
+@router.post("/refresh",response_model=GetRefreshTokenResponse)
+def get_refresh_token(body: RefreshTokenRequest): 
+    validated = check_refresh_token(body.refresh_token)
+    if validated:
+        return {
+        "access_token": generate_access_token(validated_refresh_token["user_id"]),  # ✅
+        "refresh_token": generate_refresh_token(validated_refresh_token["user_id"])}
+    else:
+        raise HTTPException(status_code=400,detail="Invalid refresh token")    
 

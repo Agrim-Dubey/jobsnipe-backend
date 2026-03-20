@@ -24,7 +24,7 @@ def get_current_user(
             algorithms=["HS256"]
         )
 
-        user_id = payload.get("sub")
+        user_id = payload.get("user_id")
 
         if user_id is None:
             raise HTTPException(

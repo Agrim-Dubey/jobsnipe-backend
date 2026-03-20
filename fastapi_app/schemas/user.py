@@ -22,4 +22,9 @@ class LoginResponse(BaseModel):
     email:str
     access_token:str
     refresh_token:str
-    
+
+class GetRefreshTokenResponse(BaseModel):
+    access_token:str
+    refresh_token:str       
+class RefreshTokenRequest(BaseModel):
+    refresh_token: str

@@ -8,4 +8,4 @@ class User(Base):
     email=Column(String,unique=True,index=True,nullable=False)
     hashed_password=Column(String,nullable=False)
     created_at=Column(DateTime,default=lambda: datetime.now(timezone.utc))
-    is_active=Column(Boolean,default=False)
+    is_active=Column(Boolean,default=True)
