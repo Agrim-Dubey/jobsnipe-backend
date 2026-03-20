@@ -5,9 +5,6 @@ from fastapi_app.dependencies.auth import get_current_user
 from fastapi_app.services.resume_service import save_resume,get_resume_by_user
 from fastapi_app.schemas.resume import ResumeUploadResponse,ResumeResponse
 
-
-
-
 router=APIRouter()
 
 
