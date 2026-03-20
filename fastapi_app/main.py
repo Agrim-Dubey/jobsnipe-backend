@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-
+from fastapi_app.routers.auth import router as auth_router
 
 
 app = FastAPI()
@@ -12,3 +12,4 @@ def read_root():
 def health_route():
     return {"status": "okay the status is fine"}
 
+app.include_router(auth_router,prefix="/auth",tags=["auth"])

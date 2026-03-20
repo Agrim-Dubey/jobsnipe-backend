@@ -1,10 +1,10 @@
 from fastapi import APIRouter,Depends
 from fastapi import HTTPException
-from fastapi_app.schemas.user import UserCreate,UserResponse
+from fastapi_app.schemas.user import UserCreate,UserResponse,LoginResponse,UserLogin
 from fastapi_app.db.database import get_db 
 from sqlalchemy.orm import Session 
-from fastapi_app.services.auth_service import check_user_exists,check_password_regex
-from fastapi_app.security import hash_password
+from fastapi_app.services.auth_service import check_user_exists,check_password_regex,check_user
+from fastapi_app.security import hash_password,generate_access_token,generate_refresh_token
 from fastapi_app.models.users import User
 
 router = APIRouter()
@@ -24,6 +24,17 @@ def register_user(user:UserCreate,db:Session=Depends(get_db)):
     db.commit()
     db.refresh(new_user)
     return new_user
+
+
+@router.post("/login",response_model=LoginResponse)
+def user_login(user:UserLogin,db:Session=Depends(get_db)):
+    user_real = check_user(user.email,user.password,db)
+    if not user_real:
+        raise HTTPException(status_code=400,detail="Invalid User Credentials")
+    else:
+        access_token= generate_access_token(user_real.id)
+        refresh_token = generate_refresh_token(user_real.id)
+        return {"user_id": user_real.id, "email": user_real.email,"access_token":access_token,"refresh_token":refresh_token,"token_type":"bearer"}
 
 
 
