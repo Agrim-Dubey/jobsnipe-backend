@@ -14,10 +14,10 @@ def upload_resume_to_s3(file_bytes,original_filename,user_id):
         s3_client.put_object(Bucket=settings.AWS_S3_BUCKET_NAME,Key=unique_filename,Body=file_bytes,ContentType="application/pdf")
         return unique_filename
     except ClientError as e:
-        raise HTTPException(status_code=500,detail="Failed to upload resume to s3")
+        raise Exception(f"Failed to upload resume: {e}")
     
     
-def get_S3_link(filename):
+def get_s3_link(filename):
     return f"https://{settings.AWS_S3_BUCKET_NAME}.s3.{settings.AWS_REGION_NAME}.amazonaws.com/{filename}"
 
 
