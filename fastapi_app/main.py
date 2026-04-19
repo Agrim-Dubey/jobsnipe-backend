@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi_app.routers.auth import router as auth_router
 from fastapi_app.routers.resume import router as resume_router
+from fastapi_app.routers.preferences import router as preferences_router
 
 app = FastAPI()
 
@@ -14,3 +15,4 @@ def health_route():
 
 app.include_router(auth_router,prefix="/auth",tags=["auth"])
 app.include_router(resume_router,prefix="/resume",tags=["resume"])
+app.include_router(preferences_router,prefix="/preferences",tags=["preferences"])

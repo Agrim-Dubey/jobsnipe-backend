@@ -5,7 +5,7 @@ import uuid
 from fastapi import HTTPException
 
 
-s3_client = boto3.client("s3",aws_access_key_id=settings.AWS_ACCESS_KEY_ID,aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY1,region_name=settings.AWS_REGION_NAME)
+s3_client = boto3.client("s3",aws_access_key_id=settings.AWS_ACCESS_KEY_ID,aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,region_name=settings.AWS_REGION_NAME)
 
 def upload_resume_to_s3(file_bytes,original_filename,user_id):
     file_extension=original_filename.split(".")[-1]

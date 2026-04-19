@@ -11,3 +11,4 @@ class User(Base):
     created_at=Column(DateTime,default=lambda: datetime.now(timezone.utc))
     is_active=Column(Boolean,default=True)
     resumes = relationship("Resume", back_populates="user")
+    preference = relationship("UserPreference", back_populates="user", uselist=False)
