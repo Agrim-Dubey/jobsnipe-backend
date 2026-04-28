@@ -3,7 +3,7 @@ from datetime import datetime
 from sqlalchemy import Column, Integer, String, ForeignKey, Enum, DateTime
 from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.orm import relationship
-from db.database import Base
+from fastapi_app.db.database import Base
 from datetime import timezone
 
 

@@ -18,7 +18,7 @@ class UserLogin(BaseModel):
     password:str
 
 class LoginResponse(BaseModel):
-    user_id:str
+    user_id:int
     email:str
     access_token:str
     refresh_token:str

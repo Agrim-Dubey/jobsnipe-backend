@@ -1,0 +1,1 @@
+# JobSnipe Scraper Module

@@ -1,11 +1,12 @@
 from logging.config import fileConfig
-from sqlalchemy import create_engine, pool 
+from sqlalchemy import create_engine, pool
 from sqlalchemy import pool
 from fastapi_app.db.database import Base
 from fastapi_app.models.users import User
-from fastapi_app.models.resume import Resume
+from fastapi_app.models.job import Job
 from alembic import context
 from fastapi_app.config import settings
+from fastapi_app.models.preference import UserPreference
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

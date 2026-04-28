@@ -9,17 +9,17 @@ router = APIRouter()
 
 @router.get("/me",response_model=PreferenceResponse)
 def get_my_preference(user= Depends(get_current_user),db:Session=Depends(get_db)):
-    user_preference = get_preference(db,user.user_id)
+    user_preference = get_preference(db,user.id)
     if not user_preference:
         raise HTTPException(status_code=400,detail="No preferences for the current user found.")
     return user_preference
 
 @router.post("",response_model=PreferenceResponse)
 def user_preferences(data:PreferenceCreate,user= Depends(get_current_user),db:Session=Depends(get_db)):
-    user_preference = create_preference(db,user.user_id,data)
+    user_preference = create_preference(db,user.id,data)
     return user_preference
 
 @router.patch("",response_model=PreferenceResponse)
 def update_preferences(data:PreferenceUpdate,user= Depends(get_current_user),db:Session=Depends(get_db)):
-    user_preference = update_preference(db,user.user_id,data) 
+    user_preference = update_preference(db,user.id,data) 
     return user_preference
